@@ -1,0 +1,17 @@
+version: "3.2"
+services:
+  mongodb:
+    image: mongo:3.2.4
+    container_name: mongo-db
+    ports:
+      - "27017:27017"
+    command: --smallfiles
+  app:
+    depends_on:
+      - mongodb
+    build: .
+    image: ma/mongo-boot-api
+    ports:
+      - "8081:8081"
+    links:
+      - mongodb
